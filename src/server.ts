@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import 'express-async-errors';
 import authRoutes from './routes/authRoutes';
-import protectedRoutes from './routes/protectedRoutes';
+import noteRoutes from './routes/noteRoutes';
 import { errorHandler } from './middlewares/erroMiddleware';
 import logger from './utils/logger';
 
@@ -11,23 +11,23 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-
-// Middlewares
+// Middleware para processar JSON
 app.use(express.json());
 
+// Rota de boas-vindas
 app.get('/', (req, res) => {
   res.status(200).json({ 
-    message: 'API do MiniProjeto-V2 está no ar!',
+    message: 'API com PostgreSQL e Prisma no ar!',
     status: 'OK',
     timestamp: new Date().toISOString() 
   });
 });
 
-// Rotas
-app.use('/api', authRoutes);
-app.use('/api', protectedRoutes);
+// Rotas da API
+app.use('/api/auth', authRoutes);
+app.use('/api/notes', noteRoutes);
 
-// Middleware de Erro (deve ser o último)
+// Middleware de Erro (deve ser o último a ser registrado)
 app.use(errorHandler);
 
 app.listen(PORT, () => {
