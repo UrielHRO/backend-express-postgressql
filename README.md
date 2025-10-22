@@ -1,5 +1,6 @@
 
-# MiniProjeto I - API com Node.js, Express e MongoDB
+# MiniProjeto I - API com Node.js, Express e Postgres
+
 
 Este é um projeto de API backend desenvolvido com Node.js (TypeScript), Express e MongoDB. Ele inclui funcionalidades de autenticação de usuários com JWT, seguindo uma arquitetura de camadas e utilizando Docker para o ambiente de banco de dados local e mongoDB atlas para ambiente em produção.
 
