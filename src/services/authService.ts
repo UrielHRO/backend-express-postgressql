@@ -13,6 +13,12 @@ export const registerUser = async (userData: any) => {
     throw { status: 400, message: 'Todos os campos são obrigatórios.' };
   }
 
+  // Validação de email usando regex
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  if (!emailRegex.test(email)) {
+    throw { status: 400, message: 'Formato de email inválido.' };
+  }
+
   const existingUser = await prisma.user.findUnique({ where: { email } });
   if (existingUser) {
     throw { status: 409, message: 'Este email já está em uso.' };
@@ -43,6 +49,12 @@ export const loginUser = async (credentials: any) => {
 
   if (!email || !password) {
     throw { status: 400, message: 'Email e senha são obrigatórios.' };
+  }
+
+  // Validação de email usando regex
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  if (!emailRegex.test(email)) {
+    throw { status: 400, message: 'Formato de email inválido.' };
   }
 
   const user = await prisma.user.findUnique({ where: { email } });
